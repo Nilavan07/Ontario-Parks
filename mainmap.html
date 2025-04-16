@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservation Page - Camping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+      #map {
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header / Navigation -->
+    <header class="bg-white shadow-md w-full z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-4">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/Ontario_Parks_logo.svg/1200px-Ontario_Parks_logo.svg.png"
+            alt="Ontario Parks"
+            class="w-14 h-auto"
+          />
+          <nav class="hidden md:flex space-x-6 text-sm">
+            <a href="#" class="hover:text-blue-600">Parks</a>
+            <a href="#" class="hover:text-blue-600">Event</a>
+            <a href="#" class="hover:text-blue-600">Guide Program</a>
+            <a href="#" class="hover:text-blue-600">Activities</a>
+            <a href="#" class="hover:text-blue-600">Rent Equipments</a>
+            <a href="#" class="hover:text-blue-600">Store</a>
+          </nav>
+        </div>
+        <a href="./about.html"
+          ><button
+            class="bg-gray-700 text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
+          >
+            Book Now
+          </button>
+        </a>
+      </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-4 py-10">
+      <div class="max-w-7xl mx-auto px-4 py-6">
+        <div class="flex items-center space-x-4 mb-4">
+          <button class="text-2xl">⬅</button>
+          <h1 class="text-xl font-semibold">Silver Lake Provincial Park</h1>
+          <div class="ml-auto flex space-x-2">
+            <button class="bg-gray-200 px-3 py-1 rounded">Map</button>
+            <button class="bg-white border px-3 py-1 rounded">List</button>
+          </div>
+        </div>
+
+        <div class="grid gap-6 transition-all duration-300 'grid-cols-1">
+          <!-- Map Area -->
+          <div class="relative rounded overflow-hidden shadow">
+            <div id="map" class="rounded"></div>
+            <div
+              class="absolute top-4 right-4 bg-white rounded shadow p-2 text-sm"
+            >
+              <label class="block"
+                ><input type="checkbox" checked /> Picnic Zone</label
+              >
+              <label class="block"
+                ><input type="checkbox" checked /> Accessible</label
+              >
+              <label class="block"
+                ><input type="checkbox" checked /> Garbage</label
+              >
+              <label class="block"
+                ><input type="checkbox" checked /> Parking</label
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function getParams() {
+          const urlParams = new URLSearchParams(window.location.search);
+          return {
+            park: urlParams.get("park"),
+            from: urlParams.get("from"),
+            to: urlParams.get("to"),
+            people: urlParams.get("people"),
+            equipment: urlParams.get("equipment"),
+          };
+        }
+
+        function handleSearch() {
+          const park = document.getElementById("parkArea").value;
+          const from = document.getElementById("fromDate").value;
+          const to = document.getElementById("toDate").value;
+          const people = document.getElementById("people").value;
+          const equipment = document.getElementById("equipment").value;
+
+          // Example URL you want to navigate to
+          const url = `mainmap.html?park=${park}&from=${from}&to=${to}&people=${people}&equipment=${equipment}`;
+
+          // Redirect to another page
+          window.location.href = url;
+        }
+
+        // Initialize map after window load
+        window.onload = function () {
+          const params = getParams();
+
+          // Ensure that parameters are being passed correctly
+          console.log("Parameters:", params);
+
+          // Set title dynamically or use default
+          const parkTitle = params.park ? params.park : "Canada All Area"; // Default to "Canada All Area" if no 'park' param
+          const parkTitleElement = document.querySelector(
+            "h1.text-xl.font-semibold"
+          );
+          if (parkTitleElement) {
+            parkTitleElement.textContent = parkTitle;
+          }
+
+          // Wait until the element exists to display information
+          const infoDiv = document.getElementById("info");
+          if (infoDiv) {
+            infoDiv.innerHTML = ` 
+              <strong>Park Area:</strong> ${params.park}<br>
+              <strong>From:</strong> ${params.from}<br>
+              <strong>To:</strong> ${params.to}<br>
+              <strong>People:</strong> ${params.people}<br>
+              <strong>Equipment:</strong> ${params.equipment}
+            `;
+          }
+
+          // Initialize Leaflet map
+          const map = L.map("map").setView([45.04, -77.3], 13); // Center at coordinates
+
+          // Tile layer for the map
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors",
+          }).addTo(map);
+
+          // Define markers for the map
+          const points = [
+            {
+              title: "South All Area",
+              lat: 45.045,
+              lng: -77.295,
+              area: "north",
+            },
+            {
+              title: "North All Area",
+              lat: 45.038,
+              lng: -77.31,
+              area: "south",
+            },
+          ];
+
+          // If 'All Area' is selected, show all points
+          const filtered =
+            params.park && params.park === "All Area"
+              ? points // Show all points if 'All Area' is selected
+              : points.filter(
+                  (p) => p.area === params.park || p.area === "all"
+                ); // Filter by selected area
+
+          filtered.forEach((p) => {
+            const marker = L.marker([p.lat, p.lng]).addTo(map);
+            marker.bindPopup(`<b>${p.title}</b>`).openPopup();
+            localStorage.setItem("selectedArea", p.title);
+
+            // Optional: also store lat and lng if you want
+            localStorage.setItem("selectedLat", p.lat);
+            localStorage.setItem("selectedLng", p.lng);
+            marker.on("click", () => {
+              // Pass data to another page (example: detail.html)
+              const url = `map.html?title=${encodeURIComponent(p.title)}&lat=${
+                p.lat
+              }&lng=${p.lng}`;
+              window.location.href = url;
+            });
+          });
+        };
+      </script>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-200 text-sm text-gray-800">
+      <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
+        <div>
+          <h3 class="font-semibold mb-4">Contact</h3>
+          <ul>
+            <li>Phone: (555) 123-4567</li>
+            <li>Email: support@camping.com</li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-4">Quick Links</h3>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3 class="font-semibold mb-4">Stay Connected</h3>
+          <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

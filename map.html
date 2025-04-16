@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservation Page - Camping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <style>
+      #map {
+        height: 400px;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header / Navigation -->
+    <header class="bg-white shadow-md w-full z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-4">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/Ontario_Parks_logo.svg/1200px-Ontario_Parks_logo.svg.png"
+            alt="Ontario Parks"
+            class="w-14 h-auto"
+          />
+          <nav class="hidden md:flex space-x-6 text-sm">
+            <a href="#" class="hover:text-blue-600">Parks</a>
+            <a href="#" class="hover:text-blue-600">Event</a>
+            <a href="#" class="hover:text-blue-600">Guide Program</a>
+            <a href="#" class="hover:text-blue-600">Activities</a>
+            <a href="#" class="hover:text-blue-600">Rent Equipments</a>
+            <a href="#" class="hover:text-blue-600">Store</a>
+          </nav>
+        </div>
+        <a href="./about.html"
+          ><button
+            class="bg-gray-700 text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
+          >
+            Book Now
+          </button>
+        </a>
+      </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-4 py-10">
+      <div
+        class="max-w-7xl mx-auto px-4 py-6"
+        x-data="mapApp()"
+        x-init="initMap()"
+      >
+        <div class="flex items-center space-x-4 mb-4">
+          <button class="text-2xl">⬅</button>
+          <h1 class="text-xl font-semibold" id="selectArea">
+            Silver Lake Provincial Park
+          </h1>
+          <div class="ml-auto flex space-x-2">
+            <button class="bg-gray-200 px-3 py-1 rounded">Map</button>
+            <button class="bg-white border px-3 py-1 rounded">List</button>
+          </div>
+        </div>
+
+        <div
+          class="grid gap-6 transition-all duration-300"
+          :class="selected ? 'grid-cols-1 md:grid-cols-2' : 'grid-cols-1'"
+        >
+          <!-- Map Area -->
+          <div class="relative rounded overflow-hidden shadow">
+            <div id="map" class="rounded"></div>
+            <div
+              class="absolute top-4 right-4 bg-white rounded shadow p-2 text-sm"
+            >
+              <label class="block"
+                ><input type="checkbox" checked /> Picnic Zone</label
+              >
+              <label class="block"
+                ><input type="checkbox" checked /> Accessible</label
+              >
+              <label class="block"
+                ><input type="checkbox" checked /> Garbage</label
+              >
+              <label class="block"
+                ><input type="checkbox" checked /> Parking</label
+              >
+            </div>
+          </div>
+
+          <!-- Detail Panel -->
+          <!-- Detail Panel -->
+          <div
+            class="rounded bg-gray-50 p-4 shadow min-h-[400px] transition-all duration-300"
+            x-show="selected"
+            x-transition
+          >
+            <template x-if="selected">
+              <div>
+                <img
+                  :src="selected.image"
+                  class="w-full h-40 object-cover rounded mb-4"
+                />
+                <h2
+                  class="text-lg font-semibold mb-2"
+                  x-text="selected.title"
+                ></h2>
+                <p
+                  class="text-sm text-gray-600 mb-4"
+                  x-text="selected.description"
+                ></p>
+                <div class="flex flex-wrap gap-2 mb-4">
+                  <template x-for="tag in selected.tags" :key="tag">
+                    <span
+                      class="px-3 py-1 bg-gray-200 rounded-full text-xs"
+                      x-text="tag"
+                    ></span>
+                  </template>
+                </div>
+                <a
+                  href="./review.html"
+                  @click="localStorage.setItem('selectedTitle', selected.title)"
+                >
+                  <button
+                    class="bg-gray-800 text-white text-sm px-4 py-2 rounded"
+                  >
+                    Book Now
+                  </button>
+                </a>
+              </div>
+            </template>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        function mapApp() {
+          return {
+            map: null,
+            selected: null,
+            initMap() {
+              this.map = L.map("map").setView([45.04, -77.3], 13);
+              L.tileLayer(
+                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+                  attribution: "&copy; OpenStreetMap contributors",
+                }
+              ).addTo(this.map);
+
+              const points = [
+                {
+                  title: "Picnic Area 1",
+                  lat: 45.045,
+                  lng: -77.295,
+                  image: "https://via.placeholder.com/400x200",
+                  description: "A great spot for family picnics near the lake.",
+                  tags: ["Pet Friendly", "Kids Friendly"],
+                },
+                {
+                  title: "Trail Entrance",
+                  lat: 45.038,
+                  lng: -77.31,
+                  image: "https://via.placeholder.com/400x200",
+                  description:
+                    "Start your hike from here and enjoy scenic views.",
+                  tags: ["Hiking", "Biking"],
+                },
+                {
+                  title: "Boat Dock",
+                  lat: 45.04,
+                  lng: -77.29,
+                  image: "https://via.placeholder.com/400x200",
+                  description: "Launch your boat and enjoy Silver Lake.",
+                  tags: ["Boating"],
+                },
+              ];
+
+              points.forEach((p) => {
+                const marker = L.marker([p.lat, p.lng]).addTo(this.map);
+                marker.on("click", () => {
+                  this.selected = p;
+                });
+              });
+            },
+          };
+        }
+      </script>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-200 text-sm text-gray-800">
+      <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
+        <!-- Footer Links -->
+        <div class="grid grid-cols-2 gap-4">
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:underline">Parks</a></li>
+            <li><a href="#" class="hover:underline">Event</a></li>
+            <li><a href="#" class="hover:underline">Guide Program</a></li>
+            <li><a href="#" class="hover:underline">Activities</a></li>
+          </ul>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:underline">Rent Equipments</a></li>
+            <li><a href="#" class="hover:underline">Store</a></li>
+            <li><a href="#" class="hover:underline">Fees</a></li>
+            <li><a href="#" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Footer Links 2 -->
+        <div class="grid grid-cols-1 gap-4">
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:underline">Donate</a></li>
+            <li><a href="#" class="hover:underline">Subscription</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+            <li>
+              <a href="#" class="hover:underline">Privacy and Security</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Subscription -->
+        <div class="flex flex-col justify-between h-full">
+          <p class="font-semibold mb-2">
+            Park updates & travel tips. Subscribe now!
+          </p>
+          <div class="flex">
+            <input
+              type="text"
+              placeholder="Enter your First Name..."
+              class="w-full p-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            />
+            <button
+              class="bg-gray-700 text-white px-4 py-2 rounded-r-md hover:bg-gray-800"
+            >
+              Subscribe
+            </button>
+          </div>
+          <div class="mt-6 flex items-center justify-end">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ontario_wordmark.svg/2560px-Ontario_wordmark.svg.png"
+              alt="Ontario"
+              class="h-6 object-contain"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Text -->
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 text-xs text-gray-600 border-t border-gray-300"
+      >
+        <p class="mb-2">
+          We are committed to providing accessible customer service. If you need
+          an alternative accessible format of this content, please contact us.
+          Ministry of the Environment, Conservation and Parks.
+        </p>
+        <p>© King's Printer for Ontario, 2025</p>
+      </div>
+    </footer>
+  </body>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const selectedTitle = localStorage.getItem("selectedArea");
+      if (selectedTitle) {
+        document.getElementById("selectArea").innerText = selectedTitle;
+      }
+    });
+  </script>
+</html>

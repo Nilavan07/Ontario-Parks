@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Reservation Page - Camping</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+  </head>
+  <body class="bg-gray-100">
+    <!-- Header / Navigation -->
+    <header class="bg-white shadow-md w-full z-50">
+      <div
+        class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"
+      >
+        <div class="flex items-center gap-4">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/Ontario_Parks_logo.svg/1200px-Ontario_Parks_logo.svg.png"
+            alt="Ontario Parks"
+            class="w-14 h-auto"
+          />
+          <nav class="hidden md:flex space-x-6 text-sm">
+            <a href="#" class="hover:text-blue-600">Parks</a>
+            <a href="#" class="hover:text-blue-600">Event</a>
+            <a href="#" class="hover:text-blue-600">Guide Program</a>
+            <a href="#" class="hover:text-blue-600">Activities</a>
+            <a href="#" class="hover:text-blue-600">Rent Equipments</a>
+            <a href="#" class="hover:text-blue-600">Store</a>
+          </nav>
+        </div>
+        <a href="./about.html"
+          ><button
+            class="bg-gray-700 text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
+          >
+            Book Now
+          </button>
+        </a>
+      </div>
+    </header>
+
+    <section class="max-w-7xl mx-auto px-4 py-10">
+      <h2 class="text-2xl font-bold mb-6">Review Reservation Details</h2>
+
+      <!-- Reservation Card -->
+      <div class="bg-white border rounded-lg overflow-hidden shadow-sm">
+        <!-- Park Image -->
+        <div
+          class="h-56 bg-gray-200 flex items-center justify-center text-gray-400"
+        >
+          <!-- Replace with actual image -->
+          <img src="https://placehold.co/1246x224" />
+        </div>
+
+        <!-- Info Block -->
+        <div
+          class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 px-6 py-4 border-b"
+        >
+          <div class="col-span-2">
+            <h3 id="location-title" class="text-lg font-semibold mb-2">
+              Silver Lake Provincial Park
+            </h3>
+            <div class="flex items-center text-sm text-gray-600 gap-3">
+              <div class="flex items-center gap-1">
+                <span>📅</span>
+                <span id="checkInDate">Tue, Jul 15, 2025</span>
+              </div>
+              <div class="flex items-center gap-1">
+                <span>📅</span>
+                <span id="checkOutDate">Wed, Jul 16, 2025</span>
+              </div>
+            </div>
+            <div class="mt-4 text-sm">
+              <p><span class="font-semibold">Check In:</span> 2:00 PM</p>
+              <p><span class="font-semibold">Check Out:</span> 2:00 PM</p>
+            </div>
+          </div>
+
+          <!-- Details -->
+          <div class="flex flex-col text-sm gap-2">
+            <div class="flex items-center gap-2">
+              <span>📍</span>
+              <span><span class="font-semibold">Site</span>: 7</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span>🌙</span>
+              <span id="nightsValue"
+                ><span class="font-semibold">Nights</span>: 1</span
+              >
+            </div>
+            <div class="flex items-center gap-2">
+              <span>🏕️</span>
+              <span id="equipmentValue"
+                ><span class="font-semibold">Equipment</span>: Single Tent</span
+              >
+            </div>
+            <div class="flex items-center gap-2">
+              <span>👤</span>
+              <span id="partySizeValue"
+                ><span class="font-semibold">Party Size</span>: 1</span
+              >
+            </div>
+          </div>
+          <div class="lg:col-span-1 flex items-end justify-end">
+            <a
+              href="#"
+              class="text-sm underline font-medium text-blue-600 hover:text-blue-800"
+              >Edit</a
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Terms and Info -->
+      <div class="mt-6 text-xs text-gray-700 space-y-3 leading-snug">
+        <p>
+          I understand that Ontario Parks reservations cannot be sold to another
+          party for more than the original cost of the reservation...
+        </p>
+        <p>
+          The campsite permit holder must be sixteen years of age or older...
+        </p>
+        <p>
+          <em>Don’t move firewood – Buy and burn firewood locally...</em>
+        </p>
+      </div>
+
+      <!-- Terms Agreement -->
+      <div class="flex items-center mt-6 gap-2">
+        <input
+          type="checkbox"
+          id="agree"
+          class="w-5 h-5 border-gray-300 rounded"
+        />
+        <label for="agree" class="text-sm text-gray-700">
+          Checking this box you agreed with the Terms & Conditions and confirm
+          that all reservation details are correct.
+        </label>
+      </div>
+
+      <!-- Confirm Button -->
+      <div class="mt-6">
+        <a href="./cart.html">
+          <button
+            type="submit"
+            class="bg-gray-800 text-white text-sm px-6 py-2 rounded hover:bg-gray-700 disabled:opacity-50"
+          >
+            Confirm reservation
+          </button>
+        </a>
+      </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer class="bg-gray-200 text-sm text-gray-800">
+      <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
+        <!-- Footer Links -->
+        <div class="grid grid-cols-2 gap-4">
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:underline">Parks</a></li>
+            <li><a href="#" class="hover:underline">Event</a></li>
+            <li><a href="#" class="hover:underline">Guide Program</a></li>
+            <li><a href="#" class="hover:underline">Activities</a></li>
+          </ul>
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:underline">Rent Equipments</a></li>
+            <li><a href="#" class="hover:underline">Store</a></li>
+            <li><a href="#" class="hover:underline">Fees</a></li>
+            <li><a href="#" class="hover:underline">Blog</a></li>
+          </ul>
+        </div>
+
+        <!-- Footer Links 2 -->
+        <div class="grid grid-cols-1 gap-4">
+          <ul class="space-y-2">
+            <li><a href="#" class="hover:underline">Donate</a></li>
+            <li><a href="#" class="hover:underline">Subscription</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+            <li>
+              <a href="#" class="hover:underline">Privacy and Security</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Subscription -->
+        <div class="flex flex-col justify-between h-full">
+          <p class="font-semibold mb-2">
+            Park updates & travel tips. Subscribe now!
+          </p>
+          <div class="flex">
+            <input
+              type="text"
+              placeholder="Enter your First Name..."
+              class="w-full p-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            />
+            <button
+              class="bg-gray-700 text-white px-4 py-2 rounded-r-md hover:bg-gray-800"
+            >
+              Subscribe
+            </button>
+          </div>
+          <div class="mt-6 flex items-center justify-end">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ontario_wordmark.svg/2560px-Ontario_wordmark.svg.png"
+              alt="Ontario"
+              class="h-6 object-contain"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Text -->
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 text-xs text-gray-600 border-t border-gray-300"
+      >
+        <p class="mb-2">
+          We are committed to providing accessible customer service. If you need
+          an alternative accessible format of this content, please contact us.
+          Ministry of the Environment, Conservation and Parks.
+        </p>
+        <p>© King's Printer for Ontario, 2025</p>
+      </div>
+    </footer>
+
+    <script>
+      // Function to update HTML based on localStorage values
+      function updateDetailsInLocalStorage() {
+        // Retrieve search history from localStorage
+        let searchData =
+          JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+        if (searchData.length > 0) {
+          const latestSearch = searchData[searchData.length - 1]; // Most recent search
+
+          // Update the HTML with values from the latest search in localStorage
+          if (latestSearch) {
+            // Update the Nights value
+            document.getElementById(
+              "nightsValue"
+            ).innerHTML = `<span class="font-semibold">Nights</span>: ${latestSearch.nights}`;
+
+            // Update the Equipment value
+            document.getElementById(
+              "equipmentValue"
+            ).innerHTML = `<span class="font-semibold">Equipment</span>: ${latestSearch.equipment}`;
+
+            // Update the Party Size value
+            document.getElementById(
+              "partySizeValue"
+            ).innerHTML = `<span class="font-semibold">Party Size</span>: ${latestSearch.people}`;
+
+            // Update Check-in/Check-out dates
+            document.getElementById("checkInDate").innerHTML =
+              latestSearch.fromDate;
+            document.getElementById("checkOutDate").innerHTML =
+              latestSearch.toDate;
+          }
+        }
+      }
+
+      // Run function to update details when page loads
+      window.onload = function () {
+        updateDetailsInLocalStorage();
+        const selectedTitle = localStorage.getItem("selectedTitle");
+        if (selectedTitle) {
+          document.getElementById("location-title").innerText = selectedTitle;
+        }
+      };
+    </script>
+  </body>
+</html>
