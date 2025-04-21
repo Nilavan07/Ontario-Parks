@@ -5,20 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reservation Page - Camping</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .logo-box {
+        background: #fff;
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+      }
+    </style>
   </head>
-  <body class="bg-white">
+  <body class="bg-gray-100">
     <!-- Header / Navigation -->
-    <header class="bg-white shadow-md w-full z-50">
+    <header class="bg-[#252B29] shadow-md fixed top-0 w-full z-50">
       <div
         class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"
       >
         <div class="flex items-center gap-4">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/Ontario_Parks_logo.svg/1200px-Ontario_Parks_logo.svg.png"
-            alt="Ontario Parks"
-            class="w-14 h-auto"
-          />
-          <nav class="hidden md:flex space-x-6 text-sm">
+          <a href="./index.html" class="logo-box">
+            <img
+              src="./images/logo.svg"
+              alt="Ontario Parks"
+              class="w-14 h-auto"
+            />
+          </a>
+
+          <nav class="hidden md:flex space-x-6 text-sm ml-24 text-white">
             <a href="#" class="hover:text-blue-600">Parks</a>
             <a href="#" class="hover:text-blue-600">Event</a>
             <a href="#" class="hover:text-blue-600">Guide Program</a>
@@ -29,7 +41,7 @@
         </div>
         <a href="./about.html"
           ><button
-            class="bg-gray-700 text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
+            class="bg-[#01AB67] text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
           >
             Book Now
           </button>
@@ -37,7 +49,7 @@
       </div>
     </header>
 
-    <section class="max-w-7xl mx-auto px-4 py-10">
+    <section class="max-w-7xl mx-auto px-4 py-10 mt-20">
       <div class="mx-auto">
         <!-- Confirmation -->
         <div class="flex items-center space-x-4 mb-4">
@@ -52,8 +64,8 @@
         >
           <div class="flex items-center space-x-4">
             <img
-              src="https://placehold.co/120x80"
-              class="rounded object-cover"
+              src="./images/silverlake.jpg"
+              class="rounded object-cover max-w-[180px]"
               alt="Park Image"
             />
             <div>
@@ -82,7 +94,7 @@
         </div>
 
         <!-- Carousel -->
-        <section class="max-w-7xl mx-auto px-4 pb-12">
+        <section class="max-w-7xl mx-auto px-4 py-12">
           <div class="flex items-center justify-between mb-6">
             <h2 class="text-xl font-bold">Top Parks to Visit This Season</h2>
             <div class="flex items-center gap-3">
@@ -109,22 +121,118 @@
           >
             <!-- Card -->
             <div
-              class="min-w-[250px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+              class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
             >
               <div class="h-48 flex items-center justify-center text-gray-400">
-                <img src="https://placehold.co/308x180" />
+                <img src="./images/home/Top Park/image-asset.jpeg" />
               </div>
               <div class="flex items-center justify-between px-4 py-3 border-t">
                 <h3 class="font-semibold text-sm">Arron Park</h3>
                 <button
-                  class="text-xs border px-3 py-1 rounded hover:bg-gray-200"
+                  class="text-xs border px-3 py-1 rounded bg-[#01AB67] text-white hover:bg-gray-200"
                 >
                   View Details
                 </button>
               </div>
             </div>
 
-            <!-- More cards as needed -->
+            <div
+              class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+            >
+              <div class="h-48 flex items-center justify-center text-gray-400">
+                <img
+                  src="./images/home/Top Park/411fa260c8ad9be03f663673384b587a.jpg.webp"
+                />
+              </div>
+              <div class="flex items-center justify-between px-4 py-3 border-t">
+                <h3 class="font-semibold text-sm">Algonquin P..</h3>
+                <button
+                  class="text-xs border px-3 py-1 rounded bg-[#01AB67] text-white hover:bg-gray-200"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+            >
+              <div class="h-48 flex items-center justify-center text-gray-400">
+                <img src="./images/home/Top Park/Ojibway.jpg" />
+              </div>
+              <div class="flex items-center justify-between px-4 py-3 border-t">
+                <h3 class="font-semibold text-sm">Bon Echo</h3>
+                <button
+                  class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+
+            <div
+              class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+            >
+              <div class="h-48 flex items-center justify-center text-gray-400">
+                <img
+                  src="./images/home/Top Park/silver_lake_park_158_gal_RS_3252_9ead2162bd.jpg"
+                />
+              </div>
+              <div class="flex items-center justify-between px-4 py-3 border-t">
+                <h3 class="font-semibold text-sm">Silver Lake</h3>
+                <button
+                  class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+            <div
+              class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+            >
+              <div class="h-48 flex items-center justify-center text-gray-400">
+                <img src="./images/home/Top Park/image-asset.jpeg" />
+              </div>
+              <div class="flex items-center justify-between px-4 py-3 border-t">
+                <h3 class="font-semibold text-sm">Silver Lake</h3>
+                <button
+                  class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+            <div
+              class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+            >
+              <div class="h-48 flex items-center justify-center text-gray-400">
+                <img src="./images/home/Top Park/image-asset.jpeg" />
+              </div>
+              <div class="flex items-center justify-between px-4 py-3 border-t">
+                <h3 class="font-semibold text-sm">Silver Lake</h3>
+                <button
+                  class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+            <div
+              class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+            >
+              <div class="h-48 flex items-center justify-center text-gray-400">
+                <img src="./images/home/Top Park/image-asset.jpeg" />
+              </div>
+              <div class="flex items-center justify-between px-4 py-3 border-t">
+                <h3 class="font-semibold text-sm">Silver Lake</h3>
+                <button
+                  class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+                >
+                  View Details
+                </button>
+              </div>
+            </div>
+            <!-- Add more cards here if needed -->
           </div>
         </section>
 
@@ -155,17 +263,17 @@
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-gray-200 text-sm text-gray-800">
+    <footer class="bg-[#252b29] text-sm text-gray-800">
       <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
         <!-- Footer Links -->
         <div class="grid grid-cols-2 gap-4">
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Parks</a></li>
             <li><a href="#" class="hover:underline">Event</a></li>
             <li><a href="#" class="hover:underline">Guide Program</a></li>
             <li><a href="#" class="hover:underline">Activities</a></li>
           </ul>
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Rent Equipments</a></li>
             <li><a href="#" class="hover:underline">Store</a></li>
             <li><a href="#" class="hover:underline">Fees</a></li>
@@ -175,7 +283,7 @@
 
         <!-- Footer Links 2 -->
         <div class="grid grid-cols-1 gap-4">
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Donate</a></li>
             <li><a href="#" class="hover:underline">Subscription</a></li>
             <li><a href="#" class="hover:underline">Contact</a></li>
@@ -187,7 +295,7 @@
 
         <!-- Subscription -->
         <div class="flex flex-col justify-between h-full">
-          <p class="font-semibold mb-2">
+          <p class="font-semibold mb-2 text-white">
             Park updates & travel tips. Subscribe now!
           </p>
           <div class="flex">
@@ -203,11 +311,7 @@
             </button>
           </div>
           <div class="mt-6 flex items-center justify-end">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ontario_wordmark.svg/2560px-Ontario_wordmark.svg.png"
-              alt="Ontario"
-              class="h-6 object-contain"
-            />
+            <img src="./images/onlogo.png" alt="Ontario Logo" />
           </div>
         </div>
       </div>
@@ -216,12 +320,12 @@
       <div
         class="max-w-7xl mx-auto px-4 py-4 text-xs text-gray-600 border-t border-gray-300"
       >
-        <p class="mb-2">
+        <p class="mb-2 text-white">
           We are committed to providing accessible customer service. If you need
           an alternative accessible format of this content, please contact us.
           Ministry of the Environment, Conservation and Parks.
         </p>
-        <p>© King's Printer for Ontario, 2025</p>
+        <p class="text-white">© King's Printer for Ontario, 2025</p>
       </div>
     </footer>
 
@@ -243,6 +347,18 @@
         if (selectedTitle) {
           document.getElementById("location-title").innerText = selectedTitle;
         }
+      });
+    </script>
+    <script>
+      const carousel = document.getElementById("carousel");
+      const scrollAmount = 300; // adjust scroll step
+
+      document.getElementById("scrollLeft").addEventListener("click", () => {
+        carousel.scrollBy({ left: -scrollAmount, behavior: "smooth" });
+      });
+
+      document.getElementById("scrollRight").addEventListener("click", () => {
+        carousel.scrollBy({ left: scrollAmount, behavior: "smooth" });
       });
     </script>
   </body>

@@ -16,20 +16,32 @@
         height: 400px;
       }
     </style>
+    <style>
+      .logo-box {
+        background: #fff;
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+      }
+    </style>
   </head>
   <body class="bg-gray-100">
     <!-- Header / Navigation -->
-    <header class="bg-white shadow-md w-full z-50">
+    <header class="bg-[#252B29] shadow-md fixed top-0 w-full z-50">
       <div
         class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"
       >
         <div class="flex items-center gap-4">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/Ontario_Parks_logo.svg/1200px-Ontario_Parks_logo.svg.png"
-            alt="Ontario Parks"
-            class="w-14 h-auto"
-          />
-          <nav class="hidden md:flex space-x-6 text-sm">
+          <a href="./index.html" class="logo-box">
+            <img
+              src="./images/logo.svg"
+              alt="Ontario Parks"
+              class="w-14 h-auto"
+            />
+          </a>
+
+          <nav class="hidden md:flex space-x-6 text-sm ml-24 text-white">
             <a href="#" class="hover:text-blue-600">Parks</a>
             <a href="#" class="hover:text-blue-600">Event</a>
             <a href="#" class="hover:text-blue-600">Guide Program</a>
@@ -40,14 +52,111 @@
         </div>
         <a href="./about.html"
           ><button
-            class="bg-gray-700 text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
+            class="bg-[#01AB67] text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
           >
             Book Now
           </button>
         </a>
       </div>
     </header>
+    <section class="relative h-[600px] mt-14">
+      <img
+        id="mainImage"
+        src="./images/about/slider/1.jpg"
+        alt="Camping"
+        class="w-full h-full object-cover brightness-75"
+      />
 
+      <!-- Search Box -->
+
+      <!-- Tabs -->
+      <div
+        class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-6xl bg-white rounded-2xl shadow-lg p-6 mb-10"
+      >
+        <!-- Tabs -->
+        <div class="grid grid-cols-4 gap-2 mb-4" id="tabContainer">
+          <a
+            href="#"
+            class="tab-link active"
+            onclick="changeImage(event, 'campsite')"
+          >
+            <div class="text-center py-2 border rounded-md font-semibold">
+              Campsite
+            </div>
+          </a>
+          <a href="#" class="tab-link" onclick="changeImage(event, 'dayuse')">
+            <div class="text-center py-2 border rounded-md font-semibold">
+              Day Use
+            </div>
+          </a>
+          <a
+            href="#"
+            class="tab-link"
+            onclick="changeImage(event, 'backcountry')"
+          >
+            <div class="text-center py-2 border rounded-md font-semibold">
+              Backcountry
+            </div>
+          </a>
+          <a
+            href="#"
+            class="tab-link"
+            onclick="changeImage(event, 'accommodations')"
+          >
+            <div class="text-center py-2 border rounded-md font-semibold">
+              Accommodations
+            </div>
+          </a>
+        </div>
+
+        <!-- Description -->
+        <p class="text-center text-sm text-gray-500 mb-4">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+
+        <!-- Form Fields -->
+        <div class="grid grid-cols-6 gap-2">
+          <select id="parkArea" class="col-span-1 p-2 border rounded">
+            <option value="">Select Park Area</option>
+
+            <option value="All Area">All Area</option>
+          </select>
+
+          <input
+            type="date"
+            id="fromDate"
+            class="col-span-1 p-2 border rounded"
+          />
+          <input
+            type="date"
+            id="toDate"
+            class="col-span-1 p-2 border rounded"
+          />
+
+          <select id="people" class="col-span-1 p-2 border rounded">
+            <option value="">People</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="4">6</option>
+          </select>
+
+          <select id="equipment" class="col-span-1 p-2 border rounded">
+            <option value="">Equipment</option>
+            <option value="tent">Tent</option>
+            <option value="bbq">Trailer</option>
+            <option value="bbq">RV</option>
+          </select>
+
+          <button
+            onclick="handleSearch()"
+            class="col-span-1 bg-[#01AB67] text-white rounded px-4 py-2 hover:bg-gray-900"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </section>
     <section class="max-w-7xl mx-auto px-4 py-10">
       <div
         class="max-w-7xl mx-auto px-4 py-6"
@@ -134,73 +243,20 @@
           </div>
         </div>
       </div>
-
-      <script>
-        function mapApp() {
-          return {
-            map: null,
-            selected: null,
-            initMap() {
-              this.map = L.map("map").setView([45.04, -77.3], 13);
-              L.tileLayer(
-                "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-                {
-                  attribution: "&copy; OpenStreetMap contributors",
-                }
-              ).addTo(this.map);
-
-              const points = [
-                {
-                  title: "Picnic Area 1",
-                  lat: 45.045,
-                  lng: -77.295,
-                  image: "https://via.placeholder.com/400x200",
-                  description: "A great spot for family picnics near the lake.",
-                  tags: ["Pet Friendly", "Kids Friendly"],
-                },
-                {
-                  title: "Trail Entrance",
-                  lat: 45.038,
-                  lng: -77.31,
-                  image: "https://via.placeholder.com/400x200",
-                  description:
-                    "Start your hike from here and enjoy scenic views.",
-                  tags: ["Hiking", "Biking"],
-                },
-                {
-                  title: "Boat Dock",
-                  lat: 45.04,
-                  lng: -77.29,
-                  image: "https://via.placeholder.com/400x200",
-                  description: "Launch your boat and enjoy Silver Lake.",
-                  tags: ["Boating"],
-                },
-              ];
-
-              points.forEach((p) => {
-                const marker = L.marker([p.lat, p.lng]).addTo(this.map);
-                marker.on("click", () => {
-                  this.selected = p;
-                });
-              });
-            },
-          };
-        }
-      </script>
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-gray-200 text-sm text-gray-800">
+    <footer class="bg-[#252b29] text-sm text-gray-800">
       <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
         <!-- Footer Links -->
         <div class="grid grid-cols-2 gap-4">
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Parks</a></li>
             <li><a href="#" class="hover:underline">Event</a></li>
             <li><a href="#" class="hover:underline">Guide Program</a></li>
             <li><a href="#" class="hover:underline">Activities</a></li>
           </ul>
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Rent Equipments</a></li>
             <li><a href="#" class="hover:underline">Store</a></li>
             <li><a href="#" class="hover:underline">Fees</a></li>
@@ -210,7 +266,7 @@
 
         <!-- Footer Links 2 -->
         <div class="grid grid-cols-1 gap-4">
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Donate</a></li>
             <li><a href="#" class="hover:underline">Subscription</a></li>
             <li><a href="#" class="hover:underline">Contact</a></li>
@@ -222,7 +278,7 @@
 
         <!-- Subscription -->
         <div class="flex flex-col justify-between h-full">
-          <p class="font-semibold mb-2">
+          <p class="font-semibold mb-2 text-white">
             Park updates & travel tips. Subscribe now!
           </p>
           <div class="flex">
@@ -238,11 +294,7 @@
             </button>
           </div>
           <div class="mt-6 flex items-center justify-end">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ontario_wordmark.svg/2560px-Ontario_wordmark.svg.png"
-              alt="Ontario"
-              class="h-6 object-contain"
-            />
+            <img src="./images/onlogo.png" alt="Ontario Logo" />
           </div>
         </div>
       </div>
@@ -251,21 +303,116 @@
       <div
         class="max-w-7xl mx-auto px-4 py-4 text-xs text-gray-600 border-t border-gray-300"
       >
-        <p class="mb-2">
+        <p class="mb-2 text-white">
           We are committed to providing accessible customer service. If you need
           an alternative accessible format of this content, please contact us.
           Ministry of the Environment, Conservation and Parks.
         </p>
-        <p>© King's Printer for Ontario, 2025</p>
+        <p class="text-white">© King's Printer for Ontario, 2025</p>
       </div>
     </footer>
   </body>
   <script>
     document.addEventListener("DOMContentLoaded", function () {
       const selectedTitle = localStorage.getItem("selectedArea");
-      if (selectedTitle) {
-        document.getElementById("selectArea").innerText = selectedTitle;
+      const areaElement = document.getElementById("selectArea");
+      if (selectedTitle && areaElement) {
+        areaElement.innerText = selectedTitle;
+      }
+
+      // Set the initial active state for the image and tab
+      const firstTab = document.querySelector(".tab-link");
+      if (firstTab && firstTab.firstElementChild) {
+        firstTab.firstElementChild.classList.add("active-tab");
+      }
+
+      const image = document.getElementById("mainImage");
+      if (image) {
+        image.src = images["campsite"];
       }
     });
+
+    function mapApp() {
+      return {
+        map: null,
+        selected: null,
+        initMap() {
+          this.map = L.map("map").setView([45.04, -77.3], 13);
+          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+            attribution: "&copy; OpenStreetMap contributors",
+          }).addTo(this.map);
+
+          const points = [
+            {
+              title: "Picnic Area 1",
+              lat: 45.045,
+              lng: -77.295,
+              image: "./images/home/Top Park/image-asset.jpeg",
+              description: "A great spot for family picnics near the lake.",
+              tags: ["Pet Friendly", "Kids Friendly"],
+            },
+            {
+              title: "Trail Entrance",
+              lat: 45.038,
+              lng: -77.31,
+              image: "./images/home/Top Park/image-asset.jpeg",
+              description: "Start your hike from here and enjoy scenic views.",
+              tags: ["Hiking", "Biking"],
+            },
+            {
+              title: "Boat Dock",
+              lat: 45.04,
+              lng: -77.29,
+              image: "./images/home/Top Park/image-asset.jpeg",
+              description: "Launch your boat and enjoy Silver Lake.",
+              tags: ["Boating"],
+            },
+          ];
+
+          points.forEach((p) => {
+            const marker = L.marker([p.lat, p.lng]).addTo(this.map);
+            marker.on("click", () => {
+              this.selected = p;
+              localStorage.setItem("selectedArea", p.title);
+              const areaElement = document.getElementById("selectArea");
+              if (areaElement) areaElement.innerText = p.title;
+            });
+          });
+        },
+      };
+    }
+
+    const images = {
+      campsite: "./images/about/slider/1.jpg",
+      dayuse: "./images/about/slider/4.png",
+      backcountry: "./images/about/slider/3.webp",
+      accommodations: "./images/about/slider/2.webp",
+    };
+
+    function changeImage(event, type) {
+      event.preventDefault();
+
+      const image = document.getElementById("mainImage");
+      if (image && images[type]) {
+        image.src = images[type];
+      }
+
+      document.querySelectorAll(".tab-link").forEach((tab) => {
+        if (tab.firstElementChild) {
+          tab.firstElementChild.classList.remove("active-tab");
+        }
+      });
+
+      if (event.currentTarget.firstElementChild) {
+        event.currentTarget.firstElementChild.classList.add("active-tab");
+      }
+    }
   </script>
+
+  <style>
+    .active-tab {
+      background-color: #3c4945;
+      color: white;
+    }
+  </style>
 </html>

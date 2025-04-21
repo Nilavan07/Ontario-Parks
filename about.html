@@ -5,23 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reservation Page - Camping</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .logo-box {
+        background: #fff;
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+      }
+    </style>
   </head>
   <body class="bg-gray-100">
     <!-- Header / Navigation -->
-    <header class="bg-white shadow-md fixed top-0 w-full z-50">
+    <header class="bg-[#252B29] shadow-md fixed top-0 w-full z-50">
       <div
         class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"
       >
         <div class="flex items-center gap-4">
-          <a href="./index.html">
+          <a href="./index.html" class="logo-box">
             <img
-              src="images/Logo.png"
+              src="./images/logo.svg"
               alt="Ontario Parks"
               class="w-14 h-auto"
             />
           </a>
 
-          <nav class="hidden md:flex space-x-6 text-sm">
+          <nav class="hidden md:flex space-x-6 text-sm ml-24 text-white">
             <a href="#" class="hover:text-blue-600">Parks</a>
             <a href="#" class="hover:text-blue-600">Event</a>
             <a href="#" class="hover:text-blue-600">Guide Program</a>
@@ -32,7 +41,7 @@
         </div>
         <a href="./about.html"
           ><button
-            class="bg-gray-700 text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
+            class="bg-[#01AB67] text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
           >
             Book Now
           </button>
@@ -41,53 +50,59 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="relative h-[600px] mt-16">
+    <section class="relative h-[600px] mt-14">
       <img
-        src="https://images.unsplash.com/photo-1504199367641-aba8151af406"
+        id="mainImage"
+        src="./images/about/slider/1.jpg"
         alt="Camping"
         class="w-full h-full object-cover brightness-75"
       />
 
       <!-- Search Box -->
+
+      <!-- Tabs -->
       <div
         class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-6xl bg-white rounded-2xl shadow-lg p-6 mb-10"
       >
         <!-- Tabs -->
-        <div class="grid grid-cols-4 gap-2 mb-4">
-          <a href="#"
-            ><div
-              class="text-center py-2 border rounded-md font-semibold bg-gray-100"
-            >
+        <div class="grid grid-cols-4 gap-2 mb-4" id="tabContainer">
+          <a
+            href="#"
+            class="tab-link active"
+            onclick="changeImage(event, 'campsite')"
+          >
+            <div class="text-center py-2 border rounded-md font-semibold">
               Campsite
-            </div></a
-          >
-          <a href="#"
-            ><div
-              class="text-center py-2 border rounded-md font-semibold bg-gray-100"
-            >
+            </div>
+          </a>
+          <a href="#" class="tab-link" onclick="changeImage(event, 'dayuse')">
+            <div class="text-center py-2 border rounded-md font-semibold">
               Day Use
-            </div></a
+            </div>
+          </a>
+          <a
+            href="#"
+            class="tab-link"
+            onclick="changeImage(event, 'backcountry')"
           >
-          <a href="#">
-            <div
-              class="text-center py-2 border rounded-md font-semibold bg-gray-100"
-            >
+            <div class="text-center py-2 border rounded-md font-semibold">
               Backcountry
-            </div></a
+            </div>
+          </a>
+          <a
+            href="#"
+            class="tab-link"
+            onclick="changeImage(event, 'accommodations')"
           >
-          <a href="#"
-            ><div
-              class="text-center py-2 border rounded-md font-semibold bg-gray-100"
-            >
+            <div class="text-center py-2 border rounded-md font-semibold">
               Accommodations
-            </div></a
-          >
+            </div>
+          </a>
         </div>
 
         <!-- Description -->
         <p class="text-center text-sm text-gray-500 mb-4">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+          Looking for a quick escape into nature? Book your Day Use permit to enjoy hiking trails, beaches, picnicking areas, and wildlife watching—perfect for a spontaneous getaway or weekend refresh.
         </p>
 
         <!-- Form Fields -->
@@ -113,17 +128,19 @@
             <option value="">People</option>
             <option value="2">2</option>
             <option value="4">4</option>
+            <option value="4">6</option>
           </select>
 
           <select id="equipment" class="col-span-1 p-2 border rounded">
             <option value="">Equipment</option>
             <option value="tent">Tent</option>
-            <option value="bbq">BBQ Grill</option>
+            <option value="bbq">Trailer</option>
+            <option value="bbq">RV</option>
           </select>
 
           <button
             onclick="handleSearch()"
-            class="col-span-1 bg-gray-800 text-white rounded px-4 py-2 hover:bg-gray-900"
+            class="col-span-1 bg-[#01AB67] text-white rounded px-4 py-2 hover:bg-gray-900"
           >
             Search
           </button>
@@ -158,95 +175,113 @@
       >
         <!-- Card -->
         <div
-          class="min-w-[250px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+          class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
         >
           <div class="h-48 flex items-center justify-center text-gray-400">
-            <img src="https://placehold.co/308x180" />
+            <img src="./images/home/Top Park/image-asset.jpeg" />
           </div>
           <div class="flex items-center justify-between px-4 py-3 border-t">
             <h3 class="font-semibold text-sm">Arron Park</h3>
-            <button class="text-xs border px-3 py-1 rounded hover:bg-gray-200">
+            <button
+              class="text-xs border px-3 py-1 rounded bg-[#01AB67] text-white hover:bg-gray-200"
+            >
               View Details
             </button>
           </div>
         </div>
 
         <div
-          class="min-w-[250px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+          class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
         >
           <div class="h-48 flex items-center justify-center text-gray-400">
-            <img src="https://placehold.co/308x180" />
+            <img
+              src="./images/home/Top Park/411fa260c8ad9be03f663673384b587a.jpg.webp"
+            />
           </div>
           <div class="flex items-center justify-between px-4 py-3 border-t">
             <h3 class="font-semibold text-sm">Algonquin P..</h3>
-            <button class="text-xs border px-3 py-1 rounded hover:bg-gray-200">
+            <button
+              class="text-xs border px-3 py-1 rounded bg-[#01AB67] text-white hover:bg-gray-200"
+            >
               View Details
             </button>
           </div>
         </div>
 
         <div
-          class="min-w-[250px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+          class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
         >
           <div class="h-48 flex items-center justify-center text-gray-400">
-            <img src="https://placehold.co/308x180" />
+            <img src="./images/home/Top Park/Ojibway.jpg" />
           </div>
           <div class="flex items-center justify-between px-4 py-3 border-t">
             <h3 class="font-semibold text-sm">Bon Echo</h3>
-            <button class="text-xs border px-3 py-1 rounded hover:bg-gray-200">
+            <button
+              class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+            >
               View Details
             </button>
           </div>
         </div>
 
         <div
-          class="min-w-[250px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+          class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
         >
           <div class="h-48 flex items-center justify-center text-gray-400">
-            <img src="https://placehold.co/308x180" />
+            <img
+              src="./images/home/Top Park/silver_lake_park_158_gal_RS_3252_9ead2162bd.jpg"
+            />
           </div>
           <div class="flex items-center justify-between px-4 py-3 border-t">
             <h3 class="font-semibold text-sm">Silver Lake</h3>
-            <button class="text-xs border px-3 py-1 rounded hover:bg-gray-200">
+            <button
+              class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+            >
               View Details
             </button>
           </div>
         </div>
         <div
-          class="min-w-[250px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+          class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
         >
           <div class="h-48 flex items-center justify-center text-gray-400">
-            <img src="https://placehold.co/308x180" />
+            <img src="./images/home/Top Park/image-asset.jpeg" />
           </div>
           <div class="flex items-center justify-between px-4 py-3 border-t">
             <h3 class="font-semibold text-sm">Silver Lake</h3>
-            <button class="text-xs border px-3 py-1 rounded hover:bg-gray-200">
+            <button
+              class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+            >
               View Details
             </button>
           </div>
         </div>
         <div
-          class="min-w-[250px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+          class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
         >
           <div class="h-48 flex items-center justify-center text-gray-400">
-            <img src="https://placehold.co/308x180" />
+            <img src="./images/home/Top Park/image-asset.jpeg" />
           </div>
           <div class="flex items-center justify-between px-4 py-3 border-t">
             <h3 class="font-semibold text-sm">Silver Lake</h3>
-            <button class="text-xs border px-3 py-1 rounded hover:bg-gray-200">
+            <button
+              class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+            >
               View Details
             </button>
           </div>
         </div>
         <div
-          class="min-w-[250px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
+          class="max-w-[308px] bg-gray-100 rounded-lg overflow-hidden border flex-shrink-0"
         >
           <div class="h-48 flex items-center justify-center text-gray-400">
-            <img src="https://placehold.co/308x180" />
+            <img src="./images/home/Top Park/image-asset.jpeg" />
           </div>
           <div class="flex items-center justify-between px-4 py-3 border-t">
             <h3 class="font-semibold text-sm">Silver Lake</h3>
-            <button class="text-xs border px-3 py-1 rounded hover:bg-gray-200">
+            <button
+              class="text-xs border px-3 py-1 bg-[#01AB67] text-white rounded hover:bg-gray-200"
+            >
               View Details
             </button>
           </div>
@@ -283,17 +318,17 @@
       </div>
     </section>
     <!-- Footer Section -->
-    <footer class="bg-gray-200 text-sm text-gray-800">
+    <footer class="bg-[#252b29] text-sm text-gray-800">
       <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
         <!-- Footer Links -->
         <div class="grid grid-cols-2 gap-4">
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Parks</a></li>
             <li><a href="#" class="hover:underline">Event</a></li>
             <li><a href="#" class="hover:underline">Guide Program</a></li>
             <li><a href="#" class="hover:underline">Activities</a></li>
           </ul>
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Rent Equipments</a></li>
             <li><a href="#" class="hover:underline">Store</a></li>
             <li><a href="#" class="hover:underline">Fees</a></li>
@@ -303,7 +338,7 @@
 
         <!-- Footer Links 2 -->
         <div class="grid grid-cols-1 gap-4">
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Donate</a></li>
             <li><a href="#" class="hover:underline">Subscription</a></li>
             <li><a href="#" class="hover:underline">Contact</a></li>
@@ -315,7 +350,7 @@
 
         <!-- Subscription -->
         <div class="flex flex-col justify-between h-full">
-          <p class="font-semibold mb-2">
+          <p class="font-semibold mb-2 text-white">
             Park updates & travel tips. Subscribe now!
           </p>
           <div class="flex">
@@ -331,11 +366,7 @@
             </button>
           </div>
           <div class="mt-6 flex items-center justify-end">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ontario_wordmark.svg/2560px-Ontario_wordmark.svg.png"
-              alt="Ontario"
-              class="h-6 object-contain"
-            />
+            <img src="./images/onlogo.png" alt="Ontario Logo" />
           </div>
         </div>
       </div>
@@ -344,12 +375,12 @@
       <div
         class="max-w-7xl mx-auto px-4 py-4 text-xs text-gray-600 border-t border-gray-300"
       >
-        <p class="mb-2">
+        <p class="mb-2 text-white">
           We are committed to providing accessible customer service. If you need
           an alternative accessible format of this content, please contact us.
           Ministry of the Environment, Conservation and Parks.
         </p>
-        <p>© King's Printer for Ontario, 2025</p>
+        <p class="text-white">© King's Printer for Ontario, 2025</p>
       </div>
     </footer>
   </body>
@@ -440,4 +471,43 @@
       scrollbar-width: none;
     }
   </style>
+  <style>
+    .active-tab {
+      background-color: #3c4945;
+      color: white;
+    }
+  </style>
+
+  <script>
+    const images = {
+      campsite: "./images/about/slider/1.jpg",
+      dayuse: "./images/about/slider/4.png",
+      backcountry: "./images/about/slider/3.webp",
+      accommodations: "./images/about/slider/2.webp",
+    };
+
+    function changeImage(event, type) {
+      event.preventDefault();
+
+      const image = document.getElementById("mainImage");
+      image.src = images[type];
+
+      // Remove active class from all tabs
+      document.querySelectorAll(".tab-link").forEach((tab) => {
+        tab.firstElementChild.classList.remove("active-tab");
+      });
+
+      // Add active class to clicked tab
+      event.currentTarget.firstElementChild.classList.add("active-tab");
+    }
+
+    // Set the initial active state
+    window.onload = function () {
+      const firstTab = document.querySelector(".tab-link");
+      firstTab.firstElementChild.classList.add("active-tab");
+
+      const image = document.getElementById("mainImage");
+      image.src = images["campsite"]; // set initial image
+    };
+  </script>
 </html>

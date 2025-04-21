@@ -16,20 +16,32 @@
         height: 400px;
       }
     </style>
+    <style>
+      .logo-box {
+        background: #fff;
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+      }
+    </style>
   </head>
   <body class="bg-gray-100">
     <!-- Header / Navigation -->
-    <header class="bg-white shadow-md w-full z-50">
+    <header class="bg-[#252B29] shadow-md fixed top-0 w-full z-50">
       <div
         class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"
       >
         <div class="flex items-center gap-4">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/Ontario_Parks_logo.svg/1200px-Ontario_Parks_logo.svg.png"
-            alt="Ontario Parks"
-            class="w-14 h-auto"
-          />
-          <nav class="hidden md:flex space-x-6 text-sm">
+          <a href="./index.html" class="logo-box">
+            <img
+              src="./images/logo.svg"
+              alt="Ontario Parks"
+              class="w-14 h-auto"
+            />
+          </a>
+
+          <nav class="hidden md:flex space-x-6 text-sm ml-24 text-white">
             <a href="#" class="hover:text-blue-600">Parks</a>
             <a href="#" class="hover:text-blue-600">Event</a>
             <a href="#" class="hover:text-blue-600">Guide Program</a>
@@ -40,14 +52,111 @@
         </div>
         <a href="./about.html"
           ><button
-            class="bg-gray-700 text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
+            class="bg-[#01AB67] text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
           >
             Book Now
           </button>
         </a>
       </div>
     </header>
+    <section class="relative h-[600px] mt-14">
+      <img
+        id="mainImage"
+        src="./images/about/slider/1.jpg"
+        alt="Camping"
+        class="w-full h-full object-cover brightness-75"
+      />
 
+      <!-- Search Box -->
+
+      <!-- Tabs -->
+      <div
+        class="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-6xl bg-white rounded-2xl shadow-lg p-6 mb-10"
+      >
+        <!-- Tabs -->
+        <div class="grid grid-cols-4 gap-2 mb-4" id="tabContainer">
+          <a
+            href="#"
+            class="tab-link active"
+            onclick="changeImage(event, 'campsite')"
+          >
+            <div class="text-center py-2 border rounded-md font-semibold">
+              Campsite
+            </div>
+          </a>
+          <a href="#" class="tab-link" onclick="changeImage(event, 'dayuse')">
+            <div class="text-center py-2 border rounded-md font-semibold">
+              Day Use
+            </div>
+          </a>
+          <a
+            href="#"
+            class="tab-link"
+            onclick="changeImage(event, 'backcountry')"
+          >
+            <div class="text-center py-2 border rounded-md font-semibold">
+              Backcountry
+            </div>
+          </a>
+          <a
+            href="#"
+            class="tab-link"
+            onclick="changeImage(event, 'accommodations')"
+          >
+            <div class="text-center py-2 border rounded-md font-semibold">
+              Accommodations
+            </div>
+          </a>
+        </div>
+
+        <!-- Description -->
+        <p class="text-center text-sm text-gray-500 mb-4">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        </p>
+
+        <!-- Form Fields -->
+        <div class="grid grid-cols-6 gap-2">
+          <select id="parkArea" class="col-span-1 p-2 border rounded">
+            <option value="">Select Park Area</option>
+
+            <option value="All Area">All Area</option>
+          </select>
+
+          <input
+            type="date"
+            id="fromDate"
+            class="col-span-1 p-2 border rounded"
+          />
+          <input
+            type="date"
+            id="toDate"
+            class="col-span-1 p-2 border rounded"
+          />
+
+          <select id="people" class="col-span-1 p-2 border rounded">
+            <option value="">People</option>
+            <option value="2">2</option>
+            <option value="4">4</option>
+            <option value="4">6</option>
+          </select>
+
+          <select id="equipment" class="col-span-1 p-2 border rounded">
+            <option value="">Equipment</option>
+            <option value="tent">Tent</option>
+            <option value="bbq">Trailer</option>
+            <option value="bbq">RV</option>
+          </select>
+
+          <button
+            onclick="handleSearch()"
+            class="col-span-1 bg-[#01AB67] text-white rounded px-4 py-2 hover:bg-gray-900"
+          >
+            Search
+          </button>
+        </div>
+      </div>
+    </section>
     <section class="max-w-7xl mx-auto px-4 py-10">
       <div class="max-w-7xl mx-auto px-4 py-6">
         <div class="flex items-center space-x-4 mb-4">
@@ -82,139 +191,231 @@
           </div>
         </div>
       </div>
-
-      <script>
-        function getParams() {
-          const urlParams = new URLSearchParams(window.location.search);
-          return {
-            park: urlParams.get("park"),
-            from: urlParams.get("from"),
-            to: urlParams.get("to"),
-            people: urlParams.get("people"),
-            equipment: urlParams.get("equipment"),
-          };
-        }
-
-        function handleSearch() {
-          const park = document.getElementById("parkArea").value;
-          const from = document.getElementById("fromDate").value;
-          const to = document.getElementById("toDate").value;
-          const people = document.getElementById("people").value;
-          const equipment = document.getElementById("equipment").value;
-
-          // Example URL you want to navigate to
-          const url = `mainmap.html?park=${park}&from=${from}&to=${to}&people=${people}&equipment=${equipment}`;
-
-          // Redirect to another page
-          window.location.href = url;
-        }
-
-        // Initialize map after window load
-        window.onload = function () {
-          const params = getParams();
-
-          // Ensure that parameters are being passed correctly
-          console.log("Parameters:", params);
-
-          // Set title dynamically or use default
-          const parkTitle = params.park ? params.park : "Canada All Area"; // Default to "Canada All Area" if no 'park' param
-          const parkTitleElement = document.querySelector(
-            "h1.text-xl.font-semibold"
-          );
-          if (parkTitleElement) {
-            parkTitleElement.textContent = parkTitle;
-          }
-
-          // Wait until the element exists to display information
-          const infoDiv = document.getElementById("info");
-          if (infoDiv) {
-            infoDiv.innerHTML = ` 
-              <strong>Park Area:</strong> ${params.park}<br>
-              <strong>From:</strong> ${params.from}<br>
-              <strong>To:</strong> ${params.to}<br>
-              <strong>People:</strong> ${params.people}<br>
-              <strong>Equipment:</strong> ${params.equipment}
-            `;
-          }
-
-          // Initialize Leaflet map
-          const map = L.map("map").setView([45.04, -77.3], 13); // Center at coordinates
-
-          // Tile layer for the map
-          L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-            attribution: "&copy; OpenStreetMap contributors",
-          }).addTo(map);
-
-          // Define markers for the map
-          const points = [
-            {
-              title: "South All Area",
-              lat: 45.045,
-              lng: -77.295,
-              area: "north",
-            },
-            {
-              title: "North All Area",
-              lat: 45.038,
-              lng: -77.31,
-              area: "south",
-            },
-          ];
-
-          // If 'All Area' is selected, show all points
-          const filtered =
-            params.park && params.park === "All Area"
-              ? points // Show all points if 'All Area' is selected
-              : points.filter(
-                  (p) => p.area === params.park || p.area === "all"
-                ); // Filter by selected area
-
-          filtered.forEach((p) => {
-            const marker = L.marker([p.lat, p.lng]).addTo(map);
-            marker.bindPopup(`<b>${p.title}</b>`).openPopup();
-            localStorage.setItem("selectedArea", p.title);
-
-            // Optional: also store lat and lng if you want
-            localStorage.setItem("selectedLat", p.lat);
-            localStorage.setItem("selectedLng", p.lng);
-            marker.on("click", () => {
-              // Pass data to another page (example: detail.html)
-              const url = `map.html?title=${encodeURIComponent(p.title)}&lat=${
-                p.lat
-              }&lng=${p.lng}`;
-              window.location.href = url;
-            });
-          });
-        };
-      </script>
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-gray-200 text-sm text-gray-800">
+    <footer class="bg-[#252b29] text-sm text-gray-800">
       <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
-        <div>
-          <h3 class="font-semibold mb-4">Contact</h3>
-          <ul>
-            <li>Phone: (555) 123-4567</li>
-            <li>Email: support@camping.com</li>
+        <!-- Footer Links -->
+        <div class="grid grid-cols-2 gap-4">
+          <ul class="space-y-2 text-white">
+            <li><a href="#" class="hover:underline">Parks</a></li>
+            <li><a href="#" class="hover:underline">Event</a></li>
+            <li><a href="#" class="hover:underline">Guide Program</a></li>
+            <li><a href="#" class="hover:underline">Activities</a></li>
+          </ul>
+          <ul class="space-y-2 text-white">
+            <li><a href="#" class="hover:underline">Rent Equipments</a></li>
+            <li><a href="#" class="hover:underline">Store</a></li>
+            <li><a href="#" class="hover:underline">Fees</a></li>
+            <li><a href="#" class="hover:underline">Blog</a></li>
           </ul>
         </div>
-        <div>
-          <h3 class="font-semibold mb-4">Quick Links</h3>
-          <ul>
-            <li><a href="#">FAQs</a></li>
-            <li><a href="#">Terms & Conditions</a></li>
+
+        <!-- Footer Links 2 -->
+        <div class="grid grid-cols-1 gap-4">
+          <ul class="space-y-2 text-white">
+            <li><a href="#" class="hover:underline">Donate</a></li>
+            <li><a href="#" class="hover:underline">Subscription</a></li>
+            <li><a href="#" class="hover:underline">Contact</a></li>
+            <li>
+              <a href="#" class="hover:underline">Privacy and Security</a>
+            </li>
           </ul>
         </div>
-        <div>
-          <h3 class="font-semibold mb-4">Stay Connected</h3>
-          <ul>
-            <li><a href="#">Facebook</a></li>
-            <li><a href="#">Twitter</a></li>
-            <li><a href="#">Instagram</a></li>
-          </ul>
+
+        <!-- Subscription -->
+        <div class="flex flex-col justify-between h-full">
+          <p class="font-semibold mb-2 text-white">
+            Park updates & travel tips. Subscribe now!
+          </p>
+          <div class="flex">
+            <input
+              type="text"
+              placeholder="Enter your First Name..."
+              class="w-full p-2 rounded-l-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400"
+            />
+            <button
+              class="bg-gray-700 text-white px-4 py-2 rounded-r-md hover:bg-gray-800"
+            >
+              Subscribe
+            </button>
+          </div>
+          <div class="mt-6 flex items-center justify-end">
+            <img src="./images/onlogo.png" alt="Ontario Logo" />
+          </div>
         </div>
+      </div>
+
+      <!-- Bottom Text -->
+      <div
+        class="max-w-7xl mx-auto px-4 py-4 text-xs text-gray-600 border-t border-gray-300"
+      >
+        <p class="mb-2 text-white">
+          We are committed to providing accessible customer service. If you need
+          an alternative accessible format of this content, please contact us.
+          Ministry of the Environment, Conservation and Parks.
+        </p>
+        <p class="text-white">© King's Printer for Ontario, 2025</p>
       </div>
     </footer>
   </body>
+  <style>
+    .active-tab {
+      background-color: #3c4945;
+      color: white;
+    }
+  </style>
+  <script>
+    const images = {
+      campsite: "./images/about/slider/1.jpg",
+      dayuse: "./images/about/slider/4.png",
+      backcountry: "./images/about/slider/3.webp",
+      accommodations: "./images/about/slider/2.webp",
+    };
+
+    function getParams() {
+      const urlParams = new URLSearchParams(window.location.search);
+      return {
+        park: urlParams.get("park"),
+        from: urlParams.get("from"),
+        to: urlParams.get("to"),
+        people: urlParams.get("people"),
+        equipment: urlParams.get("equipment"),
+      };
+    }
+
+    function handleSearch() {
+      const parkArea = document.getElementById("parkArea").value;
+      const fromDate = document.getElementById("fromDate").value;
+      const toDate = document.getElementById("toDate").value;
+      const people = document.getElementById("people").value;
+      const equipment = document.getElementById("equipment").value;
+
+      if (!parkArea || !fromDate || !toDate || !people || !equipment) {
+        alert("Please fill all the fields before searching.");
+        return;
+      }
+
+      const nights =
+        (new Date(toDate) - new Date(fromDate)) / (1000 * 60 * 60 * 24);
+
+      if (nights <= 0) {
+        alert(
+          "Please select valid dates. 'To Date' must be after 'From Date'."
+        );
+        return;
+      }
+
+      console.log(`Total Nights: ${nights}`);
+      localStorage.clear();
+
+      const newSearch = {
+        parkArea,
+        fromDate,
+        toDate,
+        nights,
+        people,
+        equipment,
+      };
+      let searchHistory =
+        JSON.parse(localStorage.getItem("searchHistory")) || [];
+
+      if (searchHistory.length > 0) {
+        searchHistory[searchHistory.length - 1] = newSearch;
+      } else {
+        searchHistory.push(newSearch);
+      }
+
+      localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
+
+      const url = `mainmap.html?nights=${nights}&park=${encodeURIComponent(
+        parkArea
+      )}&from=${encodeURIComponent(fromDate)}&to=${encodeURIComponent(
+        toDate
+      )}&people=${encodeURIComponent(people)}&equipment=${encodeURIComponent(
+        equipment
+      )}`;
+
+      window.location.href = url;
+    }
+
+    function changeImage(event, type) {
+      event.preventDefault();
+      const image = document.getElementById("mainImage");
+      image.src = images[type];
+
+      document.querySelectorAll(".tab-link").forEach((tab) => {
+        tab.firstElementChild.classList.remove("active-tab");
+      });
+
+      event.currentTarget.firstElementChild.classList.add("active-tab");
+    }
+
+    window.onload = function () {
+      // Image tab initialization
+      const firstTab = document.querySelector(".tab-link");
+      if (firstTab) {
+        firstTab.firstElementChild.classList.add("active-tab");
+      }
+      const image = document.getElementById("mainImage");
+      if (image) {
+        image.src = images["campsite"];
+      }
+
+      // Parameter handling and Map rendering
+      const params = getParams();
+      console.log("Parameters:", params);
+
+      const parkTitle = params.park ? params.park : "Canada All Area";
+      const parkTitleElement = document.querySelector(
+        "h1.text-xl.font-semibold"
+      );
+      if (parkTitleElement) {
+        parkTitleElement.textContent = parkTitle;
+      }
+
+      const infoDiv = document.getElementById("info");
+      if (infoDiv) {
+        infoDiv.innerHTML = `
+          <strong>Park Area:</strong> ${params.park}<br>
+          <strong>From:</strong> ${params.from}<br>
+          <strong>To:</strong> ${params.to}<br>
+          <strong>People:</strong> ${params.people}<br>
+          <strong>Equipment:</strong> ${params.equipment}
+        `;
+      }
+
+      const map = L.map("map").setView([45.04, -77.3], 13);
+      L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        attribution: "&copy; OpenStreetMap contributors",
+      }).addTo(map);
+
+      const points = [
+        { title: "South All Area", lat: 45.045, lng: -77.295, area: "north" },
+        { title: "North All Area", lat: 45.038, lng: -77.31, area: "south" },
+      ];
+
+      const filtered =
+        params.park && params.park === "All Area"
+          ? points
+          : points.filter((p) => p.area === params.park || p.area === "all");
+
+      filtered.forEach((p) => {
+        const marker = L.marker([p.lat, p.lng]).addTo(map);
+        marker.bindPopup(`<b>${p.title}</b>`).openPopup();
+
+        localStorage.setItem("selectedArea", p.title);
+        localStorage.setItem("selectedLat", p.lat);
+        localStorage.setItem("selectedLng", p.lng);
+
+        marker.on("click", () => {
+          const url = `map.html?title=${encodeURIComponent(p.title)}&lat=${
+            p.lat
+          }&lng=${p.lng}`;
+          window.location.href = url;
+        });
+      });
+    };
+  </script>
 </html>

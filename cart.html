@@ -5,20 +5,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Reservation Page - Camping</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+      .logo-box {
+        background: #fff;
+        padding: 10px;
+        position: absolute;
+        z-index: 1;
+        top: 0;
+      }
+    </style>
   </head>
-  <body class="bg-white">
+  <body class="bg-gray-100">
     <!-- Header / Navigation -->
-    <header class="bg-white shadow-md w-full z-50">
+    <header class="bg-[#252B29] shadow-md fixed top-0 w-full z-50">
       <div
         class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between"
       >
         <div class="flex items-center gap-4">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/en/thumb/6/65/Ontario_Parks_logo.svg/1200px-Ontario_Parks_logo.svg.png"
-            alt="Ontario Parks"
-            class="w-14 h-auto"
-          />
-          <nav class="hidden md:flex space-x-6 text-sm">
+          <a href="./index.html" class="logo-box">
+            <img
+              src="./images/logo.svg"
+              alt="Ontario Parks"
+              class="w-14 h-auto"
+            />
+          </a>
+
+          <nav class="hidden md:flex space-x-6 text-sm ml-24 text-white">
             <a href="#" class="hover:text-blue-600">Parks</a>
             <a href="#" class="hover:text-blue-600">Event</a>
             <a href="#" class="hover:text-blue-600">Guide Program</a>
@@ -29,7 +41,7 @@
         </div>
         <a href="./about.html"
           ><button
-            class="bg-gray-700 text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
+            class="bg-[#01AB67] text-white text-sm px-4 py-2 rounded hover:bg-gray-800"
           >
             Book Now
           </button>
@@ -37,7 +49,7 @@
       </div>
     </header>
 
-    <section class="max-w-7xl mx-auto px-4 py-10">
+    <section class="max-w-7xl mx-auto px-4 py-10 mt-20">
       <div class="mx-auto">
         <h1 class="text-xl font-semibold mb-4">Shopping Cart</h1>
 
@@ -126,17 +138,17 @@
     </section>
 
     <!-- Footer Section -->
-    <footer class="bg-gray-200 text-sm text-gray-800">
+    <footer class="bg-[#252b29] text-sm text-gray-800">
       <div class="max-w-7xl mx-auto px-4 py-10 grid md:grid-cols-3 gap-8">
         <!-- Footer Links -->
         <div class="grid grid-cols-2 gap-4">
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Parks</a></li>
             <li><a href="#" class="hover:underline">Event</a></li>
             <li><a href="#" class="hover:underline">Guide Program</a></li>
             <li><a href="#" class="hover:underline">Activities</a></li>
           </ul>
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Rent Equipments</a></li>
             <li><a href="#" class="hover:underline">Store</a></li>
             <li><a href="#" class="hover:underline">Fees</a></li>
@@ -146,7 +158,7 @@
 
         <!-- Footer Links 2 -->
         <div class="grid grid-cols-1 gap-4">
-          <ul class="space-y-2">
+          <ul class="space-y-2 text-white">
             <li><a href="#" class="hover:underline">Donate</a></li>
             <li><a href="#" class="hover:underline">Subscription</a></li>
             <li><a href="#" class="hover:underline">Contact</a></li>
@@ -158,7 +170,7 @@
 
         <!-- Subscription -->
         <div class="flex flex-col justify-between h-full">
-          <p class="font-semibold mb-2">
+          <p class="font-semibold mb-2 text-white">
             Park updates & travel tips. Subscribe now!
           </p>
           <div class="flex">
@@ -174,11 +186,7 @@
             </button>
           </div>
           <div class="mt-6 flex items-center justify-end">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Ontario_wordmark.svg/2560px-Ontario_wordmark.svg.png"
-              alt="Ontario"
-              class="h-6 object-contain"
-            />
+            <img src="./images/onlogo.png" alt="Ontario Logo" />
           </div>
         </div>
       </div>
@@ -187,12 +195,12 @@
       <div
         class="max-w-7xl mx-auto px-4 py-4 text-xs text-gray-600 border-t border-gray-300"
       >
-        <p class="mb-2">
+        <p class="mb-2 text-white">
           We are committed to providing accessible customer service. If you need
           an alternative accessible format of this content, please contact us.
           Ministry of the Environment, Conservation and Parks.
         </p>
-        <p>© King's Printer for Ontario, 2025</p>
+        <p class="text-white">© King's Printer for Ontario, 2025</p>
       </div>
     </footer>
 
